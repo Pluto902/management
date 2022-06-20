@@ -12,6 +12,7 @@ import java.util.*;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-20 11:02
+ * 字符串工具类
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils
 {

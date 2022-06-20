@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-20 11:00
+ * 调用静态方法的工具类
  */
 @Component
 public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
