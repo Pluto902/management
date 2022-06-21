@@ -34,7 +34,7 @@
         <mysql.version>8.0.21</mysql.version>
         <lombok.version>1.18.22</lombok.version>
         <mybatis.version>3.5.1</mybatis.version>
-        <spring-security.version>2.6.8</spring-security.version>
+        <security.version>2.6.8</security.version>
     </properties>
 
     <dependencies>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-security.version}</version>
+            <version>${security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
