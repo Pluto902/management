@@ -8,12 +8,18 @@
     <name>Management</name>
     <description>管理系统</description>
     <packaging>pom</packaging>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.7.RELEASE</version>
+    </parent>
+
 
     <modules>
-        <module>common</module>
-        <module>service</module>
-        <module>entity</module>
-        <module>management</module>
+        <module>management-common</module>
+        <module>management-servrce</module>
+        <module>management-entity</module>
+        <module>management-web</module>
     </modules>
 
 
@@ -26,6 +32,9 @@
         <lang3.version>3.12.0</lang3.version>
         <hutool.version>5.8.1</hutool.version>
         <mysql.version>8.0.21</mysql.version>
+        <lombok.version>1.18.22</lombok.version>
+        <mybatis.version>3.5.1</mybatis.version>
+        <spring-security.version>2.6.8</spring-security.version>
     </properties>
 
     <dependencies>
@@ -34,7 +43,22 @@
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -63,6 +87,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
+        </dependency>
+        <!-- mybatis-plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
         </dependency>
     </dependencies>
 
