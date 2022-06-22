@@ -1,0 +1,127 @@
+package ${packageName}.controller;
+
+import java.util.*;
+
+import com.zhangyan.management.common.Enums.ResultCodeEnums;
+import com.zhangyan.management.common.controller.ComController;
+import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.util.Result;
+import com.zhangyan.management.common.util.ResultList;
+import com.zhangyan.management.common.util.StringUtils;
+
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+
+
+
+/**
+ * ${functionName}Controller
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+
+@RestController
+@RequestMapping("/${moduleName}/${businessName}")
+public class ${ClassName}Controller extends ComController {
+
+    @Autowired
+    private ${ClassName}Service ${className}Service;
+
+
+    /**
+     * 获取${functionName}详细信息
+     */
+    @ApiOperation(value = "获取 ${functionName} ", notes = "Get ${ClassName} By Id")
+    @GetMapping(value = "/getById")
+    public Result getInfo(String ${pkColumn.javaField})
+    {
+        if(StringUtils.isNotEmpty(${pkColumn.javaField})) {
+            return Result.success(${className}Service.getById(${pkColumn.javaField}));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 新增${functionName}
+     */
+    @ApiOperation(value = "新增 ${functionName}", notes = "Add ${ClassName}")
+    @PostMapping(value = "/insert")
+    public Result add(@RequestBody ${ClassName} addRequest)
+    {
+        if(StringUtils.isNotEmpty(addRequest)) {
+            return toAjax(${className}Service.insert(addRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 修改${functionName}
+     */
+    @ApiOperation(value = "修改 ${functionName} ", notes = "Update ${ClassName} By Id")
+    @PutMapping(value = "/updateById")
+    public Result edit(@RequestBody ${ClassName} updateRequest)
+    {
+        if(StringUtils.isNotEmpty(updateRequest)) {
+            return toAjax(${className}Service.updateById(updateRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 删除${functionName}
+     */
+    @ApiOperation(value = "删除 ${functionName} ", notes = "delete ${ClassName} By Id")
+    @DeleteMapping("/deleteById")
+    public Result remove(@RequestBody ${ClassName}DelParam deleteRequest)
+    {
+        if(StringUtils.isNotEmpty(deleteRequest)&&StringUtils.isNotEmpty(deleteRequest.getId())) {
+            return toResult(${className}Service.deleteById(deleteRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 批量删除${functionName}
+     */
+    @ApiOperation(value = "批量删除${functionName}", notes = "delete ${ClassName} by batch Id")
+    @PutMapping(value = "/batch_delete")
+    public Result deleteEntityBatch(@RequestBody ${ClassName}DelParam deleteRequest) {
+        if (StringUtils.isNotEmpty(deleteRequest) && (!deleteRequest.getIds().isEmpty())) {
+            return toResult(${className}Service.deleteBatchById(deleteRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 分页查询${functionName}
+     */
+    @ApiOperation(value = "获取 ${functionName} 分页列表", notes = "List ${ClassName} with page")
+    @GetMapping(value = "/list")
+    public ResultList listEntity(${ClassName}Param param){
+        if (StringUtils.isNotEmpty(param.getPage()) && (StringUtils.isNotEmpty(param.getLimit()) {
+            return ${className}Service.list(param);
+        }
+        return ResultList.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 不分页查询${functionName}
+     */
+    @ApiOperation(value = "获取 ${functionName} 列表", notes = "List ${ClassName} all")
+    @GetMapping(value = "/datas")
+    public  ResultList listAllEntity(${ClassName}Param param){
+        return ${className}Service.datas(param);
+    }
+}

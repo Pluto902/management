@@ -1,0 +1,87 @@
+package ${packageName}.model.domain;
+
+    #foreach ($import in $importList)
+    import ${import};
+    #end
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+
+/**
+ * ${functionName}对象 ${tableName}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
+@TableName("${tableName}")
+@ApiModel(value = "${ClassName}对象" , description = "$!{tableComment}")
+public class ${ClassName} {
+
+private static final long serialVersionUID = 1L;
+#foreach($column in $columns)
+    #if(${column.isPk}=="1")
+        #set($key=1)
+        #set($keyPropertyName=${column.javaField})
+        #set($keyPropertyType=${column.javaType})
+    #end
+    #if("$!column.columnComment" != "")
+    /**
+     * ${column.columnComment}
+     */
+        #if(${column.javaType}=="BigDecimal")
+        @ApiModelProperty(value = "${column.columnComment}" , example = "0")
+        #elseif(${column.javaType}=="Double")
+        @ApiModelProperty(value = "${column.columnComment}" , example = "0")
+        #elseif(${column.javaType}=="Integer")
+        @ApiModelProperty(value = "${column.columnComment}" , example = "0")
+        #elseif(${column.javaType}=="Long")
+        @ApiModelProperty(value = "${column.columnComment}" , example = "0")
+        #elseif(${column.javaType}=="Float")
+        @ApiModelProperty(value = "${column.columnComment}" , example = "0")
+        #else
+        @ApiModelProperty(value = "${column.columnComment}")
+        #end
+    #end
+
+    #if(${column.isPk}==1)
+        ## 主键
+    @TableId("${column.columnName}")
+        ## 普通字段
+    #else
+    @TableField("${column.columnName}")
+    #end
+private ${column.javaType} ${column.javaField};
+#end
+## ----------  END 字段循环遍历  ----------
+
+#foreach($column in $columns)
+public static final String ${column.columnName.toUpperCase()} ="${column.columnName}";
+#end
+
+#if(${key}=="1")
+    #if(${keyPropertyName}=="id")
+    #else
+    @JsonIgnore
+    public ${keyPropertyType} getId(){
+            return this.${keyPropertyName};
+            }
+    @JsonIgnore
+    public void setId(${keyPropertyType} ${keyPropertyName}){
+            this.${keyPropertyName} = ${keyPropertyName};
+            }
+    #end
+
+#end
+}

@@ -1,0 +1,121 @@
+package ${packageName}.service.impl;
+
+import java.util.List;
+    #foreach ($column in $columns)
+        #if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+        import com.ruoyi.common.utils.DateUtils;
+            #break
+        #end
+    #end
+import com.zhangyan.management.common.util.ResultList;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.stereotype.Service;
+#if($table.sub)
+import java.util.ArrayList;
+import java.util.Objects;
+import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.util.StringUtils;
+import com.zhangyan.management.common.service.ComServiceImpl;
+import org.springframework.transaction.annotation.Transactional;
+import ${packageName}.domain.${subClassName};
+#end
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+
+import javax.annotation.Resource;
+/**
+ * ${functionName}Service业务层处理
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl extends ComServiceImpl implements I${ClassName}Service{
+
+    @Resource
+    private ${ClassName}Mapper ${className}Mapper;
+
+    /**
+     * 获取${functionName}详细信息
+     */
+    @Override
+    public ${ClassName} getById(String ${pkColumn.javaField}) {
+           return ${className}Mapper.getById(${pkColumn.javaField});
+    }
+
+    /**
+     * 新增${functionName}
+     */
+    @Override
+    public int insert(${ClassName} addRequest){
+        addRequest.setCreateBy(getUserId());
+        addRequest.setUpdateBy(getUserId());
+        addRequest.setCreateTime(LocalDateTime.now());
+        addRequest.setUpdateTime(LocalDateTime.now());
+        addRequest.setStatus(Constant.STATUS_ENABLE);
+        return ${className}Mapper.insert(addRequest);
+    }
+
+    /**
+     * 修改${functionName}
+     */
+    @Override
+    public int updateById(${ClassName} updateRequest){
+        updateRequest.setUpdateBy(getUserId());
+        updateRequest.setUpdateTime(LocalDateTime.now());
+        return ${className}Mapper.updateById(updateRequest);
+    }
+
+    /**
+     * 删除${functionName}
+     */
+    @Override
+    public int deleteById(${ClassName}DelParam deleteRequest){
+        ${ClassName} data= new ${ClassName}();
+        data.setId(deleteRequest.getId());
+        data.setStatus(Constant.STATUS_DELETE);
+        data.setUpdateBy(getUserId());
+        data.setUpdateTime(LocalDateTime.now());
+        return ${className}Mapper.updateById(data);
+    }
+
+    /**
+     * 批量删除${functionName}
+     */
+    @Override
+    public int deleteBatchById(${ClassName}DelParam deleteRequest){
+        List<${ClassName}> ${className}List = new ArrayList();
+        for(String id: deleteRequest.getIds()){
+            ${ClassName} data= new ${ClassName}();
+            data.setId(id);
+            data.setStatus(BizConstants.STATUS_DELETE);
+            data.setUpdateBy(getUserId());
+            data.setUpdateDate(LocalDateTime.now());
+            ${className}List.add(data);
+        }
+        return ${className}Mapper.updateBatchById(data);
+    }
+
+    /**
+     * 分页查询${functionName}
+     */
+    @Override
+    public ResultList list(${ClassName}Param param){
+        Page<${ClassName}> resultPage=new Page(page,limit);
+        Page<${ClassName}> resultList = (Page) ${className}Mapper.list(resultPage,param);
+        return ResultList.createSuccessResult(resultList.getRecords(),resultList.getTotal());
+    }
+
+    /**
+     * 不分页查询${functionName}
+     */
+    @Override
+    public ResultList datas(${ClassName}Param param){
+        List<${ClassName}> ${className}List = ${className}Mapper.datas(param);
+        return ResultList.createSuccessResult(${className}List);
+    }
+}

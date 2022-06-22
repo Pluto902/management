@@ -1,0 +1,48 @@
+package ${packageName}.service;
+
+import java.util.List;
+import ${packageName}.domain.${ClassName};
+import com.baomidou.mybatisplus.extension.service.IService;
+/**
+ * ${functionName}Service接口
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${ClassName}Service extends IService<T> {
+
+    /**
+     * 获取${functionName}详细信息
+     */
+    ${ClassName} getById(String ${pkColumn.javaField});
+
+    /**
+     * 新增${functionName}
+     */
+    int insert(${ClassName} addRequest);
+
+    /**
+     * 修改${functionName}
+     */
+    int updateById(${ClassName} updateRequest);
+
+    /**
+     * 删除${functionName}
+     */
+    int deleteById(${ClassName}DelParam deleteRequest);
+
+    /**
+     * 批量删除${functionName}
+     */
+    int deleteBatchById(${ClassName}DelParam deleteRequest);
+
+    /**
+     * 分页查询${functionName}
+     */
+    ResultList list(${ClassName}Param param);
+
+    /**
+     * 不分页查询${functionName}
+     */
+    ResultList datas(${ClassName}Param param);
+ }

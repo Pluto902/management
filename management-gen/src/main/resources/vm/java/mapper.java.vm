@@ -1,0 +1,50 @@
+package ${packageName}.dao;
+
+import
+
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List; ${packageName}.model.domain.${ClassName};
+/**
+ * ${functionName}Mapper接口
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${ClassName}Mapper {
+
+    /**
+     * 获取${functionName}详细信息
+     */
+     ${ClassName} getById(@Param("${pkColumn.javaField}") String ${pkColumn.javaField})
+
+    /**
+     * 新增${functionName}
+     */
+    int insert(@Param("${className}") ${ClassName} ${className});
+
+    /**
+     * 新增${functionName}
+     */
+    int insertBatch(@Param("${className}s") List<${ClassName}> ${className}s);
+
+    /**
+     * 修改${functionName}
+     */
+    int updateById(@Param("${className}") ${ClassName} ${className});
+
+    /**
+     * 批量修改${functionName}
+     */
+    int updateBatchById(@Param("${className}s") List<${ClassName}> ${className}s);
+
+    /**
+     * 分页查询${functionName}
+     */
+    IPage<${ClassName}> list(IPage<${ClassName}> page, @Param("${className}param") ${ClassName}Param ${className}param)
+
+    /**
+     * 不分页查询${functionName}
+     */
+    List<${ClassName}> datas(@Param("${className}param") ${ClassName}Param ${className}param)
+}

@@ -20,6 +20,7 @@
         <module>management-servrce</module>
         <module>management-entity</module>
         <module>management-web</module>
+        <module>management-gen</module>
     </modules>
 
 
@@ -35,6 +36,7 @@
         <lombok.version>1.18.22</lombok.version>
         <mybatis.version>3.5.1</mybatis.version>
         <security.version>2.6.8</security.version>
+        <springfox.version>3.0.0</springfox.version>
     </properties>
 
     <dependencies>
@@ -93,6 +95,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis.version}</version>
+        </dependency>
+        <!--        swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${springfox.version}</version>
         </dependency>
     </dependencies>
 
