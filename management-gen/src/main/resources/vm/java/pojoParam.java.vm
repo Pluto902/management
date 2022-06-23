@@ -1,10 +1,10 @@
-package ${packageName}.model.dto;
+package ${packageName}.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.util.List;
-import ${packageName}.model.domain.${ClassName};
+import ${packageName}.entity.${ClassName};
 
 /**
  * ${functionName} 删除参数对象
@@ -18,10 +18,10 @@ import ${packageName}.model.domain.${ClassName};
 public class ${ClassName}Param extends ${ClassName} {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "每页数量")
-    private String limit;
+    private Long limit;
 
     @ApiModelProperty(value = "当前页数")
-    private String page;
+    private Long page;
 
     @ApiModelProperty(value = "排序字段")
     private String orderBy;

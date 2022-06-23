@@ -11,7 +11,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO
@@ -119,6 +121,10 @@ public class SysGenTable implements Serializable {
     /** 备注 */
     private String remark;
 
+
+    /** 请求参数 */
+    private Map<String, Object> params;
+
     public boolean isSub()
     {
         return isSub(this.tplCategory);
@@ -163,4 +169,17 @@ public class SysGenTable implements Serializable {
 //        }
 //        return StringUtils.equalsAnyIgnoreCase(javaField, GenConstants.BASE_ENTITY);
 //    }
+    public Map<String, Object> getParams()
+    {
+        if (params == null)
+        {
+            params = new HashMap<>();
+        }
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params)
+    {
+        this.params = params;
+    }
 }

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${packageName}.mapper.${ClassName}Mapper">
-    <resultMap type="${ClassName}" id="${ClassName}Result">
+    <resultMap type="${packageName}.entity.${ClassName}" id="${ClassName}Result">
     #foreach ($column in $columns)
         <result property="${column.javaField}"    column="${column.columnName}"    />
     #end
@@ -15,8 +15,132 @@
 
     <sql id="Base_Condition">
         <trim prefix="WHERE" prefixOverrides="AND | OR">
-
+            #set($Param = "Param")
+            #set ($className = ${className})
+            #foreach($column in $columns)
+                #set($queryType=$column.queryType)
+                #set($javaField=$column.javaField)
+                #set($javaType=$column.javaType)
+                #set($columnName=$column.columnName)
+                #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+                #if($column.query)
+                    #if($column.queryType == "EQ")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName = #{$className$Param.$javaField}</if>
+                    #elseif($queryType == "NE")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName != #{$className$Param.$javaField}</if>
+                    #elseif($queryType == "GT")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName &gt; #{$className$Param.$javaField}</if>
+                    #elseif($queryType == "GTE")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName &gt;= #{$className$Param.$javaField}</if>
+                    #elseif($queryType == "LT")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName &lt; #{$className$Param.$javaField}</if>
+                    #elseif($queryType == "LTE")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName &lt;= #{$className$Param.$javaField}</if>
+                    #elseif($queryType == "LIKE")
+                        <if test="${className}Param.$javaField != null #if($javaType == 'String' ) and ${className}Param.$javaField.trim() != ''#end"> and $columnName like concat('%', #{$className$Param.$javaField}, '%')</if>
+                    #elseif($queryType == "BETWEEN")
+                        <if test="params.begin$AttrName != null and params.begin$AttrName != '' and params.end$AttrName != null and params.end$AttrName != ''"> and $columnName between #{params.begin$AttrName} and #{params.end$AttrName}</if>
+                    #end
+                #end
+            #end
         </trim>
     </sql>
 
+    <sql id="Base_ConditionT">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            #foreach($column in $columns)
+                #set($queryType=$column.queryType)
+                #set($javaField=$column.javaField)
+                #set($javaType=$column.javaType)
+                #set($columnName=$column.columnName)
+                #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+                #if($column.query)
+                    #if($column.queryType == "EQ")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName = #{$javaField}</if>
+                    #elseif($queryType == "NE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName != #{$javaField}</if>
+                    #elseif($queryType == "GT")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &gt; #{$javaField}</if>
+                    #elseif($queryType == "GTE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &gt;= #{$javaField}</if>
+                    #elseif($queryType == "LT")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &lt; #{$javaField}</if>
+                    #elseif($queryType == "LTE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &lt;= #{$javaField}</if>
+                    #elseif($queryType == "LIKE")
+                        <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName like concat('%', #{$javaField}, '%')</if>
+                    #elseif($queryType == "BETWEEN")
+                        <if test="params.begin$AttrName != null and params.begin$AttrName != '' and params.end$AttrName != null and params.end$AttrName != ''"> and $columnName between #{params.begin$AttrName} and #{params.end$AttrName}</if>
+                    #end
+                #end
+            #end
+        </trim>
+    </sql>
+
+    <insert id="insert" parameterType="${packageName}.entity.${ClassName}"#if($pkColumn.increment) useGeneratedKeys="true" keyProperty="$pkColumn.javaField"#end>
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.columnName != $pkColumn.columnName || !$pkColumn.increment)
+                    <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">$column.columnName,</if>
+                #end
+            #end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.columnName != $pkColumn.columnName || !$pkColumn.increment)
+                    <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">#{$column.javaField},</if>
+                #end
+            #end
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="${packageName}.entity.${ClassName}">
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.columnName != $pkColumn.columnName || !$pkColumn.increment)
+                    <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">$column.columnName,</if>
+                #end
+            #end
+        </trim>
+        value
+        <foreach item="item" index="index" collection="${className}s" separator=",">
+            (
+            #foreach($column in $columns)
+                #if($column.columnName != $pkColumn.columnName || !$pkColumn.increment)
+                    <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">#{$column.javaField},</if>
+                #end
+            #end
+            )
+        </foreach>
+    </insert>
+
+    <select id="getById" resultType="${packageName}.entity.${ClassName}">
+        <include refid="Base_Column_List"/>
+        <where>
+        ${pkColumn.columnName} = #{${pkColumn.javaField}}
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="${packageName}.entity.${ClassName}">
+        update ${tableName}
+        <trim prefix="SET" suffixOverrides=",">
+            #foreach($column in $columns)
+                #if($column.columnName != $pkColumn.columnName)
+                    <if test="$column.javaField != null#if($column.javaType == 'String' && $column.required) and $column.javaField != ''#end">$column.columnName = #{$column.javaField},</if>
+                #end
+            #end
+        </trim>
+        where ${pkColumn.columnName} = #{${pkColumn.javaField}}
+    </update>
+    <select id="list" resultType="${packageName}.entity.${ClassName}">
+        <include refid="Base_Column_List"/>
+        <include refid="Base_Condition" />
+    </select>
+
+    <select id="datas" resultType="${packageName}.entity.${ClassName}">
+        <include refid="Base_Column_List"/>
+        <include refid="Base_ConditionT" />
+    </select>
 </mapper>

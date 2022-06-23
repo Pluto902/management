@@ -1,15 +1,18 @@
 package ${packageName}.service;
 
 import java.util.List;
-import ${packageName}.domain.${ClassName};
+import ${packageName}.entity.${ClassName};
 import com.baomidou.mybatisplus.extension.service.IService;
+import ${packageName}.pojo.${ClassName}Param;
+import ${packageName}.pojo.${ClassName}DelParam;
+import com.zhangyan.management.common.util.ResultList;
 /**
  * ${functionName}Service接口
  *
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${ClassName}Service extends IService<T> {
+public interface ${ClassName}Service extends IService {
 
     /**
      * 获取${functionName}详细信息
@@ -31,10 +34,10 @@ public interface ${ClassName}Service extends IService<T> {
      */
     int deleteById(${ClassName}DelParam deleteRequest);
 
-    /**
-     * 批量删除${functionName}
-     */
-    int deleteBatchById(${ClassName}DelParam deleteRequest);
+##    /**
+##     * 批量删除${functionName}
+##     */
+##    int deleteBatchById(${ClassName}DelParam deleteRequest);
 
     /**
      * 分页查询${functionName}

@@ -10,7 +10,8 @@ import com.zhangyan.management.common.util.ResultList;
 import com.zhangyan.management.common.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
+import io.swagger.annotations.ApiOperation;
+##import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ${packageName}.domain.${ClassName};
-import ${packageName}.service.I${ClassName}Service;
+import ${packageName}.entity.${ClassName};
+import ${packageName}.service.${ClassName}Service;
+import ${packageName}.pojo.${ClassName}Param;
+import ${packageName}.pojo.${ClassName}DelParam;
 
 
 
@@ -48,7 +51,7 @@ public class ${ClassName}Controller extends ComController {
     public Result getInfo(String ${pkColumn.javaField})
     {
         if(StringUtils.isNotEmpty(${pkColumn.javaField})) {
-            return Result.success(${className}Service.getById(${pkColumn.javaField}));
+            return Result.createSuccessResult(${className}Service.getById(${pkColumn.javaField}));
         }
         return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
@@ -61,7 +64,7 @@ public class ${ClassName}Controller extends ComController {
     public Result add(@RequestBody ${ClassName} addRequest)
     {
         if(StringUtils.isNotEmpty(addRequest)) {
-            return toAjax(${className}Service.insert(addRequest));
+            return toResult(${className}Service.insert(addRequest));
         }
         return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
@@ -74,7 +77,7 @@ public class ${ClassName}Controller extends ComController {
     public Result edit(@RequestBody ${ClassName} updateRequest)
     {
         if(StringUtils.isNotEmpty(updateRequest)) {
-            return toAjax(${className}Service.updateById(updateRequest));
+            return toResult(${className}Service.updateById(updateRequest));
         }
         return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
@@ -92,17 +95,17 @@ public class ${ClassName}Controller extends ComController {
         return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
 
-    /**
-     * 批量删除${functionName}
-     */
-    @ApiOperation(value = "批量删除${functionName}", notes = "delete ${ClassName} by batch Id")
-    @PutMapping(value = "/batch_delete")
-    public Result deleteEntityBatch(@RequestBody ${ClassName}DelParam deleteRequest) {
-        if (StringUtils.isNotEmpty(deleteRequest) && (!deleteRequest.getIds().isEmpty())) {
-            return toResult(${className}Service.deleteBatchById(deleteRequest));
-        }
-        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
-    }
+##    /**
+##     * 批量删除${functionName}
+##     */
+##    @ApiOperation(value = "批量删除${functionName}", notes = "delete ${ClassName} by batch Id")
+##    @PutMapping(value = "/batch_delete")
+##    public Result deleteEntityBatch(@RequestBody ${ClassName}DelParam deleteRequest) {
+##        if (StringUtils.isNotEmpty(deleteRequest) && (!deleteRequest.getIds().isEmpty())) {
+##            return toResult(${className}Service.deleteBatchById(deleteRequest));
+##        }
+##        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+##    }
 
     /**
      * 分页查询${functionName}
@@ -110,7 +113,7 @@ public class ${ClassName}Controller extends ComController {
     @ApiOperation(value = "获取 ${functionName} 分页列表", notes = "List ${ClassName} with page")
     @GetMapping(value = "/list")
     public ResultList listEntity(${ClassName}Param param){
-        if (StringUtils.isNotEmpty(param.getPage()) && (StringUtils.isNotEmpty(param.getLimit()) {
+        if (StringUtils.isNotEmpty(param.getPage()) && (StringUtils.isNotEmpty(param.getLimit()))) {
             return ${className}Service.list(param);
         }
         return ResultList.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());

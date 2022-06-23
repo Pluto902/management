@@ -82,6 +82,16 @@ public class ResultList<T> implements Serializable {
         ret.startTime = System.currentTimeMillis();
         return ret;
     }
+    public static <T> ResultList<T> createSuccessResult(List<T> val,Long total) {
+        ResultList<T> ret = new ResultList<>();
+        ret.setSuccess(true);
+        ret.setResultCode(ResultCodeEnums.SUCCESS.getCode());
+        ret.setMsg(ResultCodeEnums.SUCCESS.getMsg());
+        ret.setData(val);
+        ret.setTotal(total);
+        ret.startTime = System.currentTimeMillis();
+        return ret;
+    }
 
     public static <T> ResultList<T> createSuccessResult(List<T> val) {
         ResultList<T> ret = new ResultList<>();

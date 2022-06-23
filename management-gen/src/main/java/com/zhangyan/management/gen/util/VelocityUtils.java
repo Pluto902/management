@@ -7,6 +7,7 @@ import com.zhangyan.management.common.util.StringUtils;
 import com.zhangyan.management.gen.entity.SysGenTable;
 import com.zhangyan.management.gen.entity.SysGenTableColumn;
 import org.apache.velocity.VelocityContext;
+import org.hibernate.validator.internal.util.StringHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -130,12 +131,14 @@ public class VelocityUtils {
     public static List<String> getTemplateList(String tplCategory)
     {
         List<String> templates = new ArrayList<String>();
-        templates.add("vm/java/domain.java.vm");
+        templates.add("vm/java/entity.java.vm");
         templates.add("vm/java/mapper.java.vm");
         templates.add("vm/java/service.java.vm");
         templates.add("vm/java/serviceImpl.java.vm");
         templates.add("vm/java/controller.java.vm");
         templates.add("vm/xml/mapper.xml.vm");
+        templates.add("vm/java/pojo.java.vm");
+        templates.add("vm/java/pojoParam.java.vm");
 //        templates.add("vm/sql/sql.vm");
 //        templates.add("vm/js/api.js.vm");
 //        if (GenConstants.TPL_CRUD.equals(tplCategory))
@@ -174,13 +177,18 @@ public class VelocityUtils {
         String mybatisPath = MYBATIS_PATH + "/" + moduleName;
         String vuePath = "vue";
 
-        if (template.contains("domain.java.vm"))
+        if (template.contains("entity.java.vm"))
         {
-            fileName = StringUtils.format("{}/domain/{}.java", javaPath, className);
+            fileName = StringUtils.format("{}/entity/{}.java", javaPath, className);
         }
-        if (template.contains("sub-domain.java.vm") && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory()))
-        {
-            fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
+//        if (template.contains("sub-domain.java.vm") && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory()))
+//        {
+//            fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
+//        }
+        else if (template.contains("pojo.java.vm")) {
+            fileName = StringUtils.format("{}/pojo/{}DelParam.java", javaPath, className);
+        } else if (template.contains("pojoParam.java.vm")) {
+            fileName = StringUtils.format("{}/pojo/{}Param.java" , javaPath, className);
         }
         else if (template.contains("mapper.java.vm"))
         {
@@ -188,7 +196,7 @@ public class VelocityUtils {
         }
         else if (template.contains("service.java.vm"))
         {
-            fileName = StringUtils.format("{}/service/I{}Service.java", javaPath, className);
+            fileName = StringUtils.format("{}/service/{}Service.java", javaPath, className);
         }
         else if (template.contains("serviceImpl.java.vm"))
         {

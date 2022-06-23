@@ -1,4 +1,4 @@
-package ${packageName}.pojo;
+package com.zhangyan.management.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,15 +7,15 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * ${functionName} 删除参数对象
+ * 系统用户 删除参数对象
  *
- * @author ${author}
- * @date ${datetime}
+ * @author ZhangYan
+ * @date 2022-06-23
  */
 
 @Data
-@ApiModel(value = "${ClassName} 删除参数对象")
-public class ${ClassName}DelParam implements java.io.Serializable {
+@ApiModel(value = "SysUser 删除参数对象")
+public class SysUserDelParam implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键ID")

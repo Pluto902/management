@@ -3,7 +3,7 @@ package ${packageName}.service.impl;
 import java.util.List;
     #foreach ($column in $columns)
         #if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
-        import com.ruoyi.common.utils.DateUtils;
+        import com.zhangyan.management.common.util.DateUtils;
             #break
         #end
     #end
@@ -20,11 +20,15 @@ import com.zhangyan.management.common.constant.Constant;
 import com.zhangyan.management.common.util.StringUtils;
 import com.zhangyan.management.common.service.ComServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
-import ${packageName}.domain.${subClassName};
+import ${packageName}.entity.${subClassName};
 #end
 import ${packageName}.mapper.${ClassName}Mapper;
-import ${packageName}.domain.${ClassName};
-import ${packageName}.service.I${ClassName}Service;
+import ${packageName}.entity.${ClassName};
+import ${packageName}.service.${ClassName}Service;
+import ${packageName}.pojo.${ClassName}Param;
+import ${packageName}.pojo.${ClassName}DelParam;
+import com.zhangyan.management.common.service.ComServiceImpl;
+import java.util.Date;
 
 import javax.annotation.Resource;
 /**
@@ -34,7 +38,7 @@ import javax.annotation.Resource;
  * @date ${datetime}
  */
 @Service
-public class ${ClassName}ServiceImpl extends ComServiceImpl implements I${ClassName}Service{
+public class ${ClassName}ServiceImpl extends ComServiceImpl implements ${ClassName}Service{
 
     @Resource
     private ${ClassName}Mapper ${className}Mapper;
@@ -54,8 +58,8 @@ public class ${ClassName}ServiceImpl extends ComServiceImpl implements I${ClassN
     public int insert(${ClassName} addRequest){
         addRequest.setCreateBy(getUserId());
         addRequest.setUpdateBy(getUserId());
-        addRequest.setCreateTime(LocalDateTime.now());
-        addRequest.setUpdateTime(LocalDateTime.now());
+        addRequest.setCreateTime(new Date());
+        addRequest.setUpdateTime(new Date());
         addRequest.setStatus(Constant.STATUS_ENABLE);
         return ${className}Mapper.insert(addRequest);
     }
@@ -66,7 +70,7 @@ public class ${ClassName}ServiceImpl extends ComServiceImpl implements I${ClassN
     @Override
     public int updateById(${ClassName} updateRequest){
         updateRequest.setUpdateBy(getUserId());
-        updateRequest.setUpdateTime(LocalDateTime.now());
+        updateRequest.setUpdateTime(new Date());
         return ${className}Mapper.updateById(updateRequest);
     }
 
@@ -79,33 +83,33 @@ public class ${ClassName}ServiceImpl extends ComServiceImpl implements I${ClassN
         data.setId(deleteRequest.getId());
         data.setStatus(Constant.STATUS_DELETE);
         data.setUpdateBy(getUserId());
-        data.setUpdateTime(LocalDateTime.now());
+        data.setUpdateTime(new Date());
         return ${className}Mapper.updateById(data);
     }
 
-    /**
-     * 批量删除${functionName}
-     */
-    @Override
-    public int deleteBatchById(${ClassName}DelParam deleteRequest){
-        List<${ClassName}> ${className}List = new ArrayList();
-        for(String id: deleteRequest.getIds()){
-            ${ClassName} data= new ${ClassName}();
-            data.setId(id);
-            data.setStatus(BizConstants.STATUS_DELETE);
-            data.setUpdateBy(getUserId());
-            data.setUpdateDate(LocalDateTime.now());
-            ${className}List.add(data);
-        }
-        return ${className}Mapper.updateBatchById(data);
-    }
+##    /**
+##     * 批量删除${functionName}
+##     */
+##    @Override
+##    public int deleteBatchById(${ClassName}DelParam deleteRequest){
+##        List<${ClassName}> ${className}List = new ArrayList();
+##        for(String id: deleteRequest.getIds()){
+##            ${ClassName} data= new ${ClassName}();
+##            data.setId(id);
+##            data.setStatus(BizConstants.STATUS_DELETE);
+##            data.setUpdateBy(getUserId());
+##            data.setUpdateDate(new Date());
+##            ${className}List.add(data);
+##        }
+##        return ${className}Mapper.updateBatchById(data);
+##    }
 
     /**
      * 分页查询${functionName}
      */
     @Override
     public ResultList list(${ClassName}Param param){
-        Page<${ClassName}> resultPage=new Page(page,limit);
+        Page<${ClassName}> resultPage=new Page(param.getPage(),param.getLimit());
         Page<${ClassName}> resultList = (Page) ${className}Mapper.list(resultPage,param);
         return ResultList.createSuccessResult(resultList.getRecords(),resultList.getTotal());
     }

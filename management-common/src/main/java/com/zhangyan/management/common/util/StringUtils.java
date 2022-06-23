@@ -76,7 +76,15 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     {
         return !isEmpty(objects);
     }
-
+    /**
+     * * 判断一个对象是否非空
+     *
+     * @param obj 要判断的对象数组
+     * @return true：非空 false：空
+     */
+    public static boolean isNotEmpty(Object obj){
+        return obj != null;
+    }
     /**
      * * 判断一个Map是否为空
      *

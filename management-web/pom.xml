@@ -30,6 +30,16 @@
         </dependency>
         <dependency>
             <groupId>com.zhangyan</groupId>
+            <artifactId>management-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zhangyan</groupId>
+            <artifactId>management-gen</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zhangyan</groupId>
             <artifactId>management-servrce</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

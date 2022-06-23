@@ -1,5 +1,7 @@
 package com.zhangyan.management.common.service;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
 /**
  * TODO
  *
@@ -7,7 +9,7 @@ package com.zhangyan.management.common.service;
  * @version V1.0
  * @since 2022-06-22 16:51
  */
-public class ComServiceImpl {
+public class ComServiceImpl extends ServiceImpl {
     //    /**
 //     * 获取用户缓存信息
 //     */
