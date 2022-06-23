@@ -1,84 +1,119 @@
 package com.zhangyan.management.controller;
 
+import java.util.*;
 
+import com.zhangyan.management.common.Enums.ResultCodeEnums;
+import com.zhangyan.management.common.controller.ComController;
+import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.util.Result;
+import com.zhangyan.management.common.util.ResultList;
+import com.zhangyan.management.common.util.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.zhangyan.management.entity.SysUser;
-import com.zhangyan.management.servrce.SysUserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.zhangyan.management.service.SysUserService;
+import com.zhangyan.management.pojo.SysUserParam;
+import com.zhangyan.management.pojo.SysUserDelParam;
 
-import javax.annotation.Resource;
+
 
 /**
- * 系统用户表(SysUser)表控制层
+ * 系统用户Controller
  *
- * @author makejava
- * @since 2022-06-21 11:18:38
+ * @author ZhangYan
+ * @date 2022-06-23
  */
+
 @RestController
-@RequestMapping("sysUser")
-public class SysUserController {
-    /**
-     * 服务对象
-     */
-    @Resource
+@RequestMapping("/management/user")
+public class SysUserController extends ComController {
+
+    @Autowired
     private SysUserService sysUserService;
 
-//    /**
-//     * 分页查询
-//     *
-//     * @param sysUser 筛选条件
-//     * @param pageRequest      分页对象
-//     * @return 查询结果
-//     */
-//    @GetMapping
-//    public ResponseEntity<Page<SysUser>> queryByPage(SysUser sysUser, PageRequest pageRequest) {
-//        return ResponseEntity.ok(this.sysUserService.queryByPage(sysUser, pageRequest));
-//    }
 
-//    /**
-//     * 通过主键查询单条数据
-//     *
-//     * @param id 主键
-//     * @return 单条数据
-//     */
-    @RequestMapping("{id}")
-    public ResponseEntity<SysUser> queryById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.sysUserService.queryById(id));
+    /**
+     * 获取系统用户详细信息
+     */
+    @ApiOperation(value = "获取 系统用户 ", notes = "Get SysUser By Id")
+    @GetMapping(value = "/getById")
+    public Result getInfo(String userId)
+    {
+        if(StringUtils.isNotEmpty(userId)) {
+            return Result.createSuccessResult(sysUserService.getById(userId));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
 
     /**
-     * 新增数据
-     *
-     * @param sysUser 实体
-     * @return 新增结果
+     * 新增系统用户
      */
-    @PostMapping
-    public ResponseEntity<SysUser> add(SysUser sysUser) {
-        return ResponseEntity.ok(this.sysUserService.insert(sysUser));
+    @ApiOperation(value = "新增 系统用户", notes = "Add SysUser")
+    @PostMapping(value = "/insert")
+    public Result add(@RequestBody SysUser addRequest)
+    {
+        if(StringUtils.isNotEmpty(addRequest)) {
+            return toResult(sysUserService.insert(addRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
 
     /**
-     * 编辑数据
-     *
-     * @param sysUser 实体
-     * @return 编辑结果
+     * 修改系统用户
      */
-    @PutMapping
-    public ResponseEntity<SysUser> edit(SysUser sysUser) {
-        return ResponseEntity.ok(this.sysUserService.update(sysUser));
+    @ApiOperation(value = "修改 系统用户 ", notes = "Update SysUser By Id")
+    @PutMapping(value = "/updateById")
+    public Result edit(@RequestBody SysUser updateRequest)
+    {
+        if(StringUtils.isNotEmpty(updateRequest)) {
+            return toResult(sysUserService.updateById(updateRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
 
     /**
-     * 删除数据
-     *
-     * @param id 主键
-     * @return 删除是否成功
+     * 删除系统用户
      */
-    @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(Long id) {
-        return ResponseEntity.ok(this.sysUserService.deleteById(id));
+    @ApiOperation(value = "删除 系统用户 ", notes = "delete SysUser By Id")
+    @DeleteMapping("/deleteById")
+    public Result remove(@RequestBody SysUserDelParam deleteRequest)
+    {
+        if(StringUtils.isNotEmpty(deleteRequest)&&StringUtils.isNotEmpty(deleteRequest.getId())) {
+            return toResult(sysUserService.deleteById(deleteRequest));
+        }
+        return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
 
+
+    /**
+     * 分页查询系统用户
+     */
+    @ApiOperation(value = "获取 系统用户 分页列表", notes = "List SysUser with page")
+    @GetMapping(value = "/list")
+    public ResultList listEntity(SysUserParam param){
+        if (StringUtils.isNotEmpty(param.getPage()) && (StringUtils.isNotEmpty(param.getLimit()))) {
+            return sysUserService.list(param);
+        }
+        return ResultList.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
+    }
+
+    /**
+     * 不分页查询系统用户
+     */
+    @ApiOperation(value = "获取 系统用户 列表", notes = "List SysUser all")
+    @GetMapping(value = "/datas")
+    public  ResultList listAllEntity(SysUserParam param){
+        return sysUserService.datas(param);
+    }
 }
-
