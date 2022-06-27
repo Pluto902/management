@@ -38,4 +38,9 @@ public class Constant {
     public static final String STATUS_ENABLE = "0";
     public static final String STATUS_DELETE = "1";
     public static final String STATUS_DISABLE = "2";
+
+    public static final String PUBLICKEY = "publicKey";
+
+    public static final String PRIVATEKEY = "privateKey";
+    public static final int DEFAULT_KEY_SIZE = 2048;
 }

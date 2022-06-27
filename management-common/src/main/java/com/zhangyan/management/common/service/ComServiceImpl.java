@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-22 16:51
+ * 公共service
  */
 public class ComServiceImpl extends ServiceImpl {
     //    /**

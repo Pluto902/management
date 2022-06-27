@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zhangyan.management.common.domain.ComModel;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -25,8 +26,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @Data
 @Accessors(chain = true)
 @TableName("${tableName}")
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "${ClassName}对象" , description = "$!{tableComment}")
-public class ${ClassName} {
+public class ${ClassName} extends ComModel{
 
 private static final long serialVersionUID = 1L;
 #foreach($column in $columns)
@@ -61,7 +63,7 @@ private static final long serialVersionUID = 1L;
     #else
     @TableField("${column.columnName}")
     #end
-private ${column.javaType} ${column.javaField};
+    private ${column.javaType} ${column.javaField};
 #end
 ## ----------  END 字段循环遍历  ----------
 

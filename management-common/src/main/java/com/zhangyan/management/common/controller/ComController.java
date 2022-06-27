@@ -8,6 +8,7 @@ import com.zhangyan.management.common.util.Result;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-22 11:35
+ * 公共controller
  */
 public class ComController {
 

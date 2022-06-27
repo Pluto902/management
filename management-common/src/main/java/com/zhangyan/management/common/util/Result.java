@@ -8,6 +8,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TODO
+ *
+ * @author ZhangYan
+ * @version V1.0
+ * @since 2022-06-24 15:11
+ * 返回结果工具
+ */
 @ApiModel(description = "Result类")
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 5616070434977448606L;

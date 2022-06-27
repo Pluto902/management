@@ -2,9 +2,12 @@ package com.zhangyan.management.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.util.List;
 import com.zhangyan.management.entity.SysUser;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 系统用户 删除参数对象
@@ -14,6 +17,9 @@ import com.zhangyan.management.entity.SysUser;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @ApiModel(value = "SysUser 列表查询参数对象")
 public class SysUserParam extends SysUser {
     private static final long serialVersionUID = 1L;

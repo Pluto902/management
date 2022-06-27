@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-23 14:40
+ * swagger配置类
  */
 @Configuration
 public class SwaggerConfig {

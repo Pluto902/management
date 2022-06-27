@@ -12,6 +12,7 @@ import java.util.List;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-22 15:46
+ * 返回列表工具
  */
 public class ResultList<T> implements Serializable {
     private static final long serialVersionUID = 5616070434977448606L;

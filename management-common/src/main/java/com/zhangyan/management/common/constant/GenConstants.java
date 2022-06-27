@@ -6,6 +6,7 @@ package com.zhangyan.management.common.constant;
  * @author ZhangYan
  * @version V1.0
  * @since 2022-06-22 10:31
+ * 生成代码常量类
  */
 public class GenConstants {
     /** 单表（增删改查） */

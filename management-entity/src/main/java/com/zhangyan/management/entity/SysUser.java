@@ -2,6 +2,7 @@ package com.zhangyan.management.entity;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zhangyan.management.common.domain.ComModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,7 +26,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @Accessors(chain = true)
 @TableName("sys_user")
 @ApiModel(value = "SysUser对象" , description = "")
-public class SysUser {
+@EqualsAndHashCode(callSuper = true)
+public class SysUser extends ComModel {
 
 private static final long serialVersionUID = 1L;
     /**
