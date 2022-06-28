@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhangyan.management.mapper.SysUserMapper">
-    <resultMap type="com.zhangyan.management.entity.SysUser" id="SysUserResult">
+<mapper namespace="com.zhangyan.management.system.mapper.SysUserMapper">
+    <resultMap type="com.zhangyan.management.system.entity.SysUser" id="SysUserResult">
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
         <result property="userName"    column="user_name"    />
@@ -63,7 +63,7 @@
         </trim>
     </sql>
 
-    <insert id="insert" parameterType="com.zhangyan.management.entity.SysUser" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="insert" parameterType="com.zhangyan.management.system.entity.SysUser" useGeneratedKeys="true" keyProperty="userId">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
                     <if test="deptId != null">dept_id,</if>
@@ -107,7 +107,7 @@
         </trim>
     </insert>
 
-    <insert id="insertBatch" parameterType="com.zhangyan.management.entity.SysUser">
+    <insert id="insertBatch" parameterType="com.zhangyan.management.system.entity.SysUser">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
                     <if test="deptId != null">dept_id,</if>
@@ -154,14 +154,14 @@
         </foreach>
     </insert>
 
-    <select id="getById" resultType="com.zhangyan.management.entity.SysUser">
+    <select id="getById" resultType="com.zhangyan.management.system.entity.SysUser">
         <include refid="Base_Column_List"/>
         <where>
         user_id = #{userId}
         </where>
     </select>
 
-    <update id="updateById" parameterType="com.zhangyan.management.entity.SysUser">
+    <update id="updateById" parameterType="com.zhangyan.management.system.entity.SysUser">
         update sys_user
         <trim prefix="SET" suffixOverrides=",">
                     <if test="deptId != null">dept_id = #{deptId},</if>
@@ -185,12 +185,12 @@
         </trim>
         where user_id = #{userId}
     </update>
-    <select id="list" resultType="com.zhangyan.management.entity.SysUser">
+    <select id="list" resultType="com.zhangyan.management.system.entity.SysUser">
         <include refid="Base_Column_List"/>
         <include refid="Base_Condition" />
     </select>
 
-    <select id="datas" resultType="com.zhangyan.management.entity.SysUser">
+    <select id="datas" resultType="com.zhangyan.management.system.entity.SysUser">
         <include refid="Base_Column_List"/>
         <include refid="Base_ConditionT" />
     </select>

@@ -1,4 +1,4 @@
-package com.zhangyan.management.controller;
+package com.zhangyan.management.system.controller;
 
 /**
  * TODO

@@ -1,11 +1,10 @@
-package com.zhangyan.management.pojo;
+package com.zhangyan.management.system.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.List;
-import com.zhangyan.management.entity.SysUser;
+import com.zhangyan.management.system.entity.SysUser;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 

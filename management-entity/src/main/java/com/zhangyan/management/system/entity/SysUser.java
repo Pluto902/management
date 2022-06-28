@@ -1,7 +1,7 @@
-package com.zhangyan.management.entity;
+package com.zhangyan.management.system.entity;
 
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.zhangyan.management.common.domain.ComModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 
 
 /**

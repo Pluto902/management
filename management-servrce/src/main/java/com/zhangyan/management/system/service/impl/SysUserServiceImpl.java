@@ -1,20 +1,16 @@
-package com.zhangyan.management.service.impl;
+package com.zhangyan.management.system.service.impl;
 
 import java.util.List;
 
 import com.zhangyan.management.common.constant.Constant;
-import com.zhangyan.management.common.util.DateUtils;
 import com.zhangyan.management.common.util.ResultList;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
-import com.zhangyan.management.mapper.SysUserMapper;
-import com.zhangyan.management.entity.SysUser;
-import com.zhangyan.management.service.SysUserService;
-import com.zhangyan.management.pojo.SysUserParam;
-import com.zhangyan.management.pojo.SysUserDelParam;
+import com.zhangyan.management.system.mapper.SysUserMapper;
+import com.zhangyan.management.system.entity.SysUser;
+import com.zhangyan.management.system.service.SysUserService;
+import com.zhangyan.management.system.pojo.SysUserParam;
+import com.zhangyan.management.system.pojo.SysUserDelParam;
 import com.zhangyan.management.common.service.ComServiceImpl;
 import java.util.Date;
 

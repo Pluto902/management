@@ -1,8 +1,8 @@
-package com.zhangyan.management.mapper;
+package com.zhangyan.management.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zhangyan.management.entity.SysUser;
-import com.zhangyan.management.pojo.SysUserParam;
+import com.zhangyan.management.system.entity.SysUser;
+import com.zhangyan.management.system.pojo.SysUserParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.baomidou.mybatisplus.core.metadata.IPage;

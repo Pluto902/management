@@ -1,4 +1,4 @@
-package com.zhangyan.management.pojo;
+package com.zhangyan.management.system.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

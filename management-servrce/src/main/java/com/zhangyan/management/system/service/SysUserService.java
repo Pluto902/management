@@ -1,10 +1,9 @@
-package com.zhangyan.management.service;
+package com.zhangyan.management.system.service;
 
-import java.util.List;
-import com.zhangyan.management.entity.SysUser;
+import com.zhangyan.management.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zhangyan.management.pojo.SysUserParam;
-import com.zhangyan.management.pojo.SysUserDelParam;
+import com.zhangyan.management.system.pojo.SysUserParam;
+import com.zhangyan.management.system.pojo.SysUserDelParam;
 import com.zhangyan.management.common.util.ResultList;
 /**
  * 系统用户Service接口

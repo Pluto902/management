@@ -15,6 +15,7 @@ import java.util.List;
  * @author ${author}
  * @date ${datetime}
  */
+@Mapper
 public interface ${ClassName}Mapper extends BaseMapper {
 
     /**
@@ -25,7 +26,7 @@ public interface ${ClassName}Mapper extends BaseMapper {
     /**
      * 新增${functionName}
      */
-    int insert(@Param(${ClassName} ${className});
+    int insert(${ClassName} ${className});
 
     /**
      * 新增${functionName}
