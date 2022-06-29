@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangyan.management.system.mapper.SysUserRoleMapper">
+    <resultMap type="com.zhangyan.management.system.entity.SysUserRole" id="SysUserRoleResult">
+        <result property="userId"    column="user_id"    />
+        <result property="roleId"    column="role_id"    />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        select user_id, role_id from sys_user_role
+    </sql>
+
+    <sql id="Base_Condition">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+        </trim>
+    </sql>
+
+    <sql id="Base_ConditionT">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+        </trim>
+    </sql>
+
+    <insert id="insert" parameterType="com.zhangyan.management.system.entity.SysUserRole">
+        insert into sys_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="userId != null">user_id,</if>
+                    <if test="roleId != null">role_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="userId != null">#{userId},</if>
+                    <if test="roleId != null">#{roleId},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.zhangyan.management.system.entity.SysUserRole">
+        insert into sys_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="userId != null">user_id,</if>
+                    <if test="roleId != null">role_id,</if>
+        </trim>
+        value
+        <foreach item="item" index="index" collection="sysUserRoles" separator=",">
+            (
+                    <if test="userId != null">#{userId},</if>
+                    <if test="roleId != null">#{roleId},</if>
+            )
+        </foreach>
+    </insert>
+
+    <select id="getById" resultType="com.zhangyan.management.system.entity.SysUserRole">
+        <include refid="Base_Column_List"/>
+        <where>
+        user_id = #{userId}
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.zhangyan.management.system.entity.SysUserRole">
+        update sys_user_role
+        <trim prefix="SET" suffixOverrides=",">
+                    <if test="roleId != null">role_id = #{roleId},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+    <select id="list" resultType="com.zhangyan.management.system.entity.SysUserRole">
+        <include refid="Base_Column_List"/>
+        <include refid="Base_Condition" />
+    </select>
+
+    <select id="datas" resultType="com.zhangyan.management.system.entity.SysUserRole">
+        <include refid="Base_Column_List"/>
+        <include refid="Base_ConditionT" />
+    </select>
+</mapper>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangyan.management.system.mapper.SysResourceMapper">
+    <resultMap type="com.zhangyan.management.system.entity.SysResource" id="SysResourceResult">
+        <result property="resourceId"    column="resource_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="parentIds"    column="parent_ids"    />
+        <result property="resourceName"    column="resource_name"    />
+        <result property="resourceSort"    column="resource_sort"    />
+        <result property="resourceLevel"    column="resource_level"    />
+        <result property="resourceType"    column="resource_type"    />
+        <result property="isShow"    column="is_show"    />
+        <result property="resourceUrl"    column="resource_url"    />
+        <result property="photoUrl"    column="photo_url"    />
+        <result property="permission"    column="permission"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="routerMapping"    column="router_mapping"    />
+        <result property="resourceAuthType"    column="resource_auth_type"    />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        select resource_id, parent_id, parent_ids, resource_name, resource_sort, resource_level, resource_type, is_show, resource_url, photo_url, permission, status, create_by, create_date, update_by, update_date, remarks, router_mapping, resource_auth_type from sys_resource
+    </sql>
+
+    <sql id="Base_Condition">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+                    <if test="sysResourceParam.parentId != null "> and parent_id = #{sysResourceParam.parentId}</if>
+                    <if test="sysResourceParam.parentIds != null  and sysResourceParam.parentIds != ''"> and parent_ids = #{sysResourceParam.parentIds}</if>
+                    <if test="sysResourceParam.resourceName != null  and sysResourceParam.resourceName != ''"> and resource_name like concat('%', #{sysResourceParam.resourceName}, '%')</if>
+                    <if test="sysResourceParam.resourceSort != null "> and resource_sort = #{sysResourceParam.resourceSort}</if>
+                    <if test="sysResourceParam.resourceLevel != null "> and resource_level = #{sysResourceParam.resourceLevel}</if>
+                    <if test="sysResourceParam.resourceType != null  and sysResourceParam.resourceType != ''"> and resource_type = #{sysResourceParam.resourceType}</if>
+                    <if test="sysResourceParam.isShow != null  and sysResourceParam.isShow != ''"> and is_show = #{sysResourceParam.isShow}</if>
+                    <if test="sysResourceParam.resourceUrl != null  and sysResourceParam.resourceUrl != ''"> and resource_url = #{sysResourceParam.resourceUrl}</if>
+                    <if test="sysResourceParam.photoUrl != null  and sysResourceParam.photoUrl != ''"> and photo_url = #{sysResourceParam.photoUrl}</if>
+                    <if test="sysResourceParam.permission != null  and sysResourceParam.permission != ''"> and permission = #{sysResourceParam.permission}</if>
+                    <if test="sysResourceParam.status != null  and sysResourceParam.status != ''"> and status = #{sysResourceParam.status}</if>
+                    <if test="sysResourceParam.createDate != null "> and create_date = #{sysResourceParam.createDate}</if>
+                    <if test="sysResourceParam.updateDate != null "> and update_date = #{sysResourceParam.updateDate}</if>
+                    <if test="sysResourceParam.remarks != null  and sysResourceParam.remarks != ''"> and remarks = #{sysResourceParam.remarks}</if>
+                    <if test="sysResourceParam.routerMapping != null  and sysResourceParam.routerMapping != ''"> and router_mapping = #{sysResourceParam.routerMapping}</if>
+                    <if test="sysResourceParam.resourceAuthType != null  and sysResourceParam.resourceAuthType != ''"> and resource_auth_type = #{sysResourceParam.resourceAuthType}</if>
+        </trim>
+    </sql>
+
+    <sql id="Base_ConditionT">
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+                    <if test="parentId != null "> and parent_id = #{parentId}</if>
+                    <if test="parentIds != null  and parentIds != ''"> and parent_ids = #{parentIds}</if>
+                    <if test="resourceName != null  and resourceName != ''"> and resource_name like concat('%', #{resourceName}, '%')</if>
+                    <if test="resourceSort != null "> and resource_sort = #{resourceSort}</if>
+                    <if test="resourceLevel != null "> and resource_level = #{resourceLevel}</if>
+                    <if test="resourceType != null  and resourceType != ''"> and resource_type = #{resourceType}</if>
+                    <if test="isShow != null  and isShow != ''"> and is_show = #{isShow}</if>
+                    <if test="resourceUrl != null  and resourceUrl != ''"> and resource_url = #{resourceUrl}</if>
+                    <if test="photoUrl != null  and photoUrl != ''"> and photo_url = #{photoUrl}</if>
+                    <if test="permission != null  and permission != ''"> and permission = #{permission}</if>
+                    <if test="status != null  and status != ''"> and status = #{status}</if>
+                    <if test="createDate != null "> and create_date = #{createDate}</if>
+                    <if test="updateDate != null "> and update_date = #{updateDate}</if>
+                    <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+                    <if test="routerMapping != null  and routerMapping != ''"> and router_mapping = #{routerMapping}</if>
+                    <if test="resourceAuthType != null  and resourceAuthType != ''"> and resource_auth_type = #{resourceAuthType}</if>
+        </trim>
+    </sql>
+
+    <insert id="insert" parameterType="com.zhangyan.management.system.entity.SysResource" useGeneratedKeys="true" keyProperty="resourceId">
+        insert into sys_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="parentId != null">parent_id,</if>
+                    <if test="parentIds != null">parent_ids,</if>
+                    <if test="resourceName != null">resource_name,</if>
+                    <if test="resourceSort != null">resource_sort,</if>
+                    <if test="resourceLevel != null">resource_level,</if>
+                    <if test="resourceType != null">resource_type,</if>
+                    <if test="isShow != null">is_show,</if>
+                    <if test="resourceUrl != null">resource_url,</if>
+                    <if test="photoUrl != null">photo_url,</if>
+                    <if test="permission != null">permission,</if>
+                    <if test="status != null">status,</if>
+                    <if test="createBy != null">create_by,</if>
+                    <if test="createDate != null">create_date,</if>
+                    <if test="updateBy != null">update_by,</if>
+                    <if test="updateDate != null">update_date,</if>
+                    <if test="remarks != null">remarks,</if>
+                    <if test="routerMapping != null">router_mapping,</if>
+                    <if test="resourceAuthType != null">resource_auth_type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="parentId != null">#{parentId},</if>
+                    <if test="parentIds != null">#{parentIds},</if>
+                    <if test="resourceName != null">#{resourceName},</if>
+                    <if test="resourceSort != null">#{resourceSort},</if>
+                    <if test="resourceLevel != null">#{resourceLevel},</if>
+                    <if test="resourceType != null">#{resourceType},</if>
+                    <if test="isShow != null">#{isShow},</if>
+                    <if test="resourceUrl != null">#{resourceUrl},</if>
+                    <if test="photoUrl != null">#{photoUrl},</if>
+                    <if test="permission != null">#{permission},</if>
+                    <if test="status != null">#{status},</if>
+                    <if test="createBy != null">#{createBy},</if>
+                    <if test="createDate != null">#{createDate},</if>
+                    <if test="updateBy != null">#{updateBy},</if>
+                    <if test="updateDate != null">#{updateDate},</if>
+                    <if test="remarks != null">#{remarks},</if>
+                    <if test="routerMapping != null">#{routerMapping},</if>
+                    <if test="resourceAuthType != null">#{resourceAuthType},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.zhangyan.management.system.entity.SysResource">
+        insert into sys_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="parentId != null">parent_id,</if>
+                    <if test="parentIds != null">parent_ids,</if>
+                    <if test="resourceName != null">resource_name,</if>
+                    <if test="resourceSort != null">resource_sort,</if>
+                    <if test="resourceLevel != null">resource_level,</if>
+                    <if test="resourceType != null">resource_type,</if>
+                    <if test="isShow != null">is_show,</if>
+                    <if test="resourceUrl != null">resource_url,</if>
+                    <if test="photoUrl != null">photo_url,</if>
+                    <if test="permission != null">permission,</if>
+                    <if test="status != null">status,</if>
+                    <if test="createBy != null">create_by,</if>
+                    <if test="createDate != null">create_date,</if>
+                    <if test="updateBy != null">update_by,</if>
+                    <if test="updateDate != null">update_date,</if>
+                    <if test="remarks != null">remarks,</if>
+                    <if test="routerMapping != null">router_mapping,</if>
+                    <if test="resourceAuthType != null">resource_auth_type,</if>
+        </trim>
+        value
+        <foreach item="item" index="index" collection="sysResources" separator=",">
+            (
+                    <if test="parentId != null">#{parentId},</if>
+                    <if test="parentIds != null">#{parentIds},</if>
+                    <if test="resourceName != null">#{resourceName},</if>
+                    <if test="resourceSort != null">#{resourceSort},</if>
+                    <if test="resourceLevel != null">#{resourceLevel},</if>
+                    <if test="resourceType != null">#{resourceType},</if>
+                    <if test="isShow != null">#{isShow},</if>
+                    <if test="resourceUrl != null">#{resourceUrl},</if>
+                    <if test="photoUrl != null">#{photoUrl},</if>
+                    <if test="permission != null">#{permission},</if>
+                    <if test="status != null">#{status},</if>
+                    <if test="createBy != null">#{createBy},</if>
+                    <if test="createDate != null">#{createDate},</if>
+                    <if test="updateBy != null">#{updateBy},</if>
+                    <if test="updateDate != null">#{updateDate},</if>
+                    <if test="remarks != null">#{remarks},</if>
+                    <if test="routerMapping != null">#{routerMapping},</if>
+                    <if test="resourceAuthType != null">#{resourceAuthType},</if>
+            )
+        </foreach>
+    </insert>
+
+    <select id="getById" resultType="com.zhangyan.management.system.entity.SysResource">
+        <include refid="Base_Column_List"/>
+        <where>
+        resource_id = #{resourceId}
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.zhangyan.management.system.entity.SysResource">
+        update sys_resource
+        <trim prefix="SET" suffixOverrides=",">
+                    <if test="parentId != null">parent_id = #{parentId},</if>
+                    <if test="parentIds != null">parent_ids = #{parentIds},</if>
+                    <if test="resourceName != null">resource_name = #{resourceName},</if>
+                    <if test="resourceSort != null">resource_sort = #{resourceSort},</if>
+                    <if test="resourceLevel != null">resource_level = #{resourceLevel},</if>
+                    <if test="resourceType != null">resource_type = #{resourceType},</if>
+                    <if test="isShow != null">is_show = #{isShow},</if>
+                    <if test="resourceUrl != null">resource_url = #{resourceUrl},</if>
+                    <if test="photoUrl != null">photo_url = #{photoUrl},</if>
+                    <if test="permission != null">permission = #{permission},</if>
+                    <if test="status != null">status = #{status},</if>
+                    <if test="createBy != null">create_by = #{createBy},</if>
+                    <if test="createDate != null">create_date = #{createDate},</if>
+                    <if test="updateBy != null">update_by = #{updateBy},</if>
+                    <if test="updateDate != null">update_date = #{updateDate},</if>
+                    <if test="remarks != null">remarks = #{remarks},</if>
+                    <if test="routerMapping != null">router_mapping = #{routerMapping},</if>
+                    <if test="resourceAuthType != null">resource_auth_type = #{resourceAuthType},</if>
+        </trim>
+        where resource_id = #{resourceId}
+    </update>
+    <select id="list" resultType="com.zhangyan.management.system.entity.SysResource">
+        <include refid="Base_Column_List"/>
+        <include refid="Base_Condition" />
+    </select>
+
+    <select id="datas" resultType="com.zhangyan.management.system.entity.SysResource">
+        <include refid="Base_Column_List"/>
+        <include refid="Base_ConditionT" />
+    </select>
+</mapper>
