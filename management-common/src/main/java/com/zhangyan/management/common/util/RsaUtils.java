@@ -1,13 +1,7 @@
 package com.zhangyan.management.common.util;
 
-import com.sun.javafx.binding.StringConstant;
-import com.zhangyan.management.common.constant.Constant;
-import org.springframework.data.redis.cache.RedisCache;
+import com.zhangyan.management.common.constant.Constants;
 
-import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -32,7 +26,7 @@ public class RsaUtils {
      * @throws Exception
      */
     public static PublicKey getPublicKey() throws Exception {
-        String PublicKey = ConvertUtil.objectToString(SpringUtils.getBean(RedisUtil.class).get(Constant.PUBLICKEY));
+        String PublicKey = ConvertUtil.objectToString(SpringUtils.getBean(RedisUtil.class).get(Constants.PUBLICKEY));
         return getPublicKey(ConvertUtil.stringToByte(PublicKey));
     }
 
@@ -43,7 +37,7 @@ public class RsaUtils {
      * @throws Exception
      */
     public static PrivateKey getPrivateKey() throws Exception {
-        String PrivateKey = ConvertUtil.objectToString(SpringUtils.getBean(RedisUtil.class).get(Constant.PRIVATEKEY));
+        String PrivateKey = ConvertUtil.objectToString(SpringUtils.getBean(RedisUtil.class).get(Constants.PRIVATEKEY));
         return getPrivateKey(ConvertUtil.stringToByte(PrivateKey));
     }
 
@@ -83,20 +77,20 @@ public class RsaUtils {
     public static void generateKey(String secret, int keySize) throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         SecureRandom secureRandom = new SecureRandom(secret.getBytes());
-        keyPairGenerator.initialize(Math.max(keySize, Constant.DEFAULT_KEY_SIZE), secureRandom);
+        keyPairGenerator.initialize(Math.max(keySize, Constants.DEFAULT_KEY_SIZE), secureRandom);
         KeyPair keyPair = keyPairGenerator.genKeyPair();
         // 获取公钥并写出
         byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
         publicKeyBytes = Base64.getEncoder().encode(publicKeyBytes);
         String publicKey = new String(publicKeyBytes);
         //存入redis
-        SpringUtils.getBean(RedisUtil.class).set(Constant.PUBLICKEY,publicKey);
+        SpringUtils.getBean(RedisUtil.class).set(Constants.PUBLICKEY,publicKey);
         // 获取私钥并写出
         byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
         privateKeyBytes = Base64.getEncoder().encode(privateKeyBytes);
         String privateKey = new String(privateKeyBytes);
         //存入redis
-        SpringUtils.getBean(RedisUtil.class).set(Constant.PRIVATEKEY,privateKey);
+        SpringUtils.getBean(RedisUtil.class).set(Constants.PRIVATEKEY,privateKey);
     }
 
 

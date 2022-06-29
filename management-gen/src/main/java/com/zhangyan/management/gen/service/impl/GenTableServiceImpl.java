@@ -3,7 +3,7 @@ package com.zhangyan.management.gen.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.constant.Constants;
 import com.zhangyan.management.common.constant.GenConstants;
 import com.zhangyan.management.common.util.CharsetKit;
 import com.zhangyan.management.common.util.StringUtils;
@@ -22,7 +22,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -213,7 +212,7 @@ public class GenTableServiceImpl implements IGenTableService
         {
             // 渲染模板
             StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, Constant.UTF8);
+            Template tpl = Velocity.getTemplate(template, Constants.UTF8);
             tpl.merge(context, sw);
             dataMap.put(template, sw.toString());
         }
@@ -263,7 +262,7 @@ public class GenTableServiceImpl implements IGenTableService
             {
                 // 渲染模板
                 StringWriter sw = new StringWriter();
-                Template tpl = Velocity.getTemplate(template, Constant.UTF8);
+                Template tpl = Velocity.getTemplate(template, Constants.UTF8);
                 tpl.merge(context, sw);
                 try
                 {
@@ -374,13 +373,13 @@ public class GenTableServiceImpl implements IGenTableService
         {
             // 渲染模板
             StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, Constant.UTF8);
+            Template tpl = Velocity.getTemplate(template, Constants.UTF8);
             tpl.merge(context, sw);
             try
             {
                 // 添加到zip
                 zip.putNextEntry(new ZipEntry(VelocityUtils.getFileName(template, table)));
-                IOUtils.write(sw.toString(), zip, Constant.UTF8);
+                IOUtils.write(sw.toString(), zip, Constants.UTF8);
                 IOUtils.closeQuietly(sw);
                 zip.flush();
                 zip.closeEntry();

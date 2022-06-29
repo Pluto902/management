@@ -1,7 +1,7 @@
 package com.zhangyan.management.common.util;
 
 import cn.hutool.core.text.StrFormatter;
-import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.constant.Constants;
 import org.springframework.util.AntPathMatcher;
 
 import java.util.*;
@@ -277,7 +277,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
      */
     public static boolean ishttp(String link)
     {
-        return StringUtils.startsWithAny(link, Constant.HTTP, Constant.HTTPS);
+        return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
     }
 
     /**

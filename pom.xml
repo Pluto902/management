@@ -41,6 +41,7 @@
         <knife4j.version>3.0.3</knife4j.version>
         <redis.version>2.7.0</redis.version>
         <jwt.version>0.11.5</jwt.version>
+        <bitwalker.version>1.21</bitwalker.version>
     </properties>
 
     <dependencies>
@@ -54,11 +55,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--            <version>${security.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${security.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -117,10 +118,17 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>${redis.version}</version>
         </dependency>
+        <!--        token-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>${jwt.version}</version>
+        </dependency>
+        <!-- 解析客户端操作系统、浏览器等 -->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>${bitwalker.version}</version>
         </dependency>
     </dependencies>
 

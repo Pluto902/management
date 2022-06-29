@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * 返回结果工具
  */
 @ApiModel(description = "Result类")
-public class Result<T> implements Serializable {
+public class Result<T> extends HashMap<String, Object> implements Serializable {
     private static final long serialVersionUID = 5616070434977448606L;
     private boolean success;
     private String resultCode;
@@ -118,6 +119,13 @@ public class Result<T> implements Serializable {
             this.timeConsum = System.currentTimeMillis() - this.startTime;
             return this;
         }
+    }
+
+
+    public Result<T> put(String key, Object value)
+    {
+        super.put(key, value);
+        return this;
     }
 
     public T value() {

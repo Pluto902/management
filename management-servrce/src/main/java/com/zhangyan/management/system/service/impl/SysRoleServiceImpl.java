@@ -2,15 +2,8 @@ package com.zhangyan.management.system.service.impl;
 
 import java.util.List;
 
-import com.zhangyan.management.common.constant.Constant;
-import com.zhangyan.management.common.util.DateUtils;
+import com.zhangyan.management.common.constant.Constants;
 import com.zhangyan.management.common.util.ResultList;
-import com.zhangyan.management.system.entity.SysUser;
-import com.zhangyan.management.system.mapper.SysUserMapper;
-import com.zhangyan.management.system.service.SysUserService;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import com.zhangyan.management.system.mapper.SysRoleMapper;
@@ -51,7 +44,7 @@ public class SysRoleServiceImpl extends ComServiceImpl<SysRoleMapper, SysRole> i
 //        addRequest.setUpdateBy(getUserId());
         addRequest.setCreateTime(new Date());
         addRequest.setUpdateTime(new Date());
-        addRequest.setStatus(Constant.STATUS_ENABLE);
+        addRequest.setStatus(Constants.STATUS_ENABLE);
         return sysRoleMapper.insert(addRequest);
     }
 
@@ -72,7 +65,7 @@ public class SysRoleServiceImpl extends ComServiceImpl<SysRoleMapper, SysRole> i
     public int deleteById(SysRoleDelParam deleteRequest){
         SysRole data= new SysRole();
         data.setId(deleteRequest.getId());
-        data.setStatus(Constant.STATUS_DELETE);
+        data.setStatus(Constants.STATUS_DELETE);
 //        data.setUpdateBy(getUserId());
         data.setUpdateTime(new Date());
         return sysRoleMapper.updateById(data);

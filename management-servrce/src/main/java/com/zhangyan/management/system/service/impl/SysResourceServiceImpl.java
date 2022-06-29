@@ -2,11 +2,8 @@ package com.zhangyan.management.system.service.impl;
 
 import java.util.List;
 
-import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.constant.Constants;
 import com.zhangyan.management.common.util.ResultList;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import com.zhangyan.management.system.mapper.SysResourceMapper;
@@ -15,7 +12,6 @@ import com.zhangyan.management.system.service.SysResourceService;
 import com.zhangyan.management.system.pojo.SysResourceParam;
 import com.zhangyan.management.system.pojo.SysResourceDelParam;
 import com.zhangyan.management.common.service.ComServiceImpl;
-import java.util.Date;
 
 import javax.annotation.Resource;
 /**
@@ -47,7 +43,7 @@ public class SysResourceServiceImpl extends ComServiceImpl<SysResourceMapper, Sy
 //        addRequest.setUpdateBy(getUserId());
 //        addRequest.setCreateTime(new Date());
 //        addRequest.setUpdateTime(new Date());
-        addRequest.setStatus(Constant.STATUS_ENABLE);
+        addRequest.setStatus(Constants.STATUS_ENABLE);
         return sysResourceMapper.insert(addRequest);
     }
 
@@ -68,7 +64,7 @@ public class SysResourceServiceImpl extends ComServiceImpl<SysResourceMapper, Sy
     public int deleteById(SysResourceDelParam deleteRequest){
         SysResource data= new SysResource();
         data.setId(deleteRequest.getId());
-        data.setStatus(Constant.STATUS_DELETE);
+        data.setStatus(Constants.STATUS_DELETE);
 //        data.setUpdateBy(getUserId());
 //        data.setUpdateTime(new Date());
         return sysResourceMapper.updateById(data);

@@ -2,7 +2,7 @@ package com.zhangyan.management.system.service.impl;
 
 import java.util.List;
 
-import com.zhangyan.management.common.constant.Constant;
+import com.zhangyan.management.common.constant.Constants;
 import com.zhangyan.management.common.util.ResultList;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class SysUserServiceImpl extends ComServiceImpl<SysUserMapper,SysUser> im
 //        addRequest.setUpdateBy(getUserId());
         addRequest.setCreateTime(new Date());
         addRequest.setUpdateTime(new Date());
-        addRequest.setStatus(Constant.STATUS_ENABLE);
+        addRequest.setStatus(Constants.STATUS_ENABLE);
         return sysUserMapper.insert(addRequest);
     }
 
@@ -65,7 +65,7 @@ public class SysUserServiceImpl extends ComServiceImpl<SysUserMapper,SysUser> im
     public int deleteById(SysUserDelParam deleteRequest){
         SysUser data= new SysUser();
         data.setId(deleteRequest.getId());
-        data.setStatus(Constant.STATUS_DELETE);
+        data.setStatus(Constants.STATUS_DELETE);
 //        data.setUpdateBy(getUserId());
         data.setUpdateTime(new Date());
         return sysUserMapper.updateById(data);

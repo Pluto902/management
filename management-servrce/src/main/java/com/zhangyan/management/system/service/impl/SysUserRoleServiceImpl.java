@@ -2,11 +2,7 @@ package com.zhangyan.management.system.service.impl;
 
 import java.util.List;
 
-import com.zhangyan.management.common.constant.Constant;
 import com.zhangyan.management.common.util.ResultList;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import com.zhangyan.management.system.mapper.SysUserRoleMapper;
@@ -15,7 +11,6 @@ import com.zhangyan.management.system.service.SysUserRoleService;
 import com.zhangyan.management.system.pojo.SysUserRoleParam;
 import com.zhangyan.management.system.pojo.SysUserRoleDelParam;
 import com.zhangyan.management.common.service.ComServiceImpl;
-import java.util.Date;
 
 import javax.annotation.Resource;
 /**

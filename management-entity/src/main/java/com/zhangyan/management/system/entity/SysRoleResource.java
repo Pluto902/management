@@ -32,28 +32,16 @@ private static final long serialVersionUID = 1L;
     /**
      * 角色表主键
      */
-        @ApiModelProperty(value = "角色表主键" , example = "0")
-
-            @TableId("role_id")
-            private Long roleId;
+    @ApiModelProperty(value = "角色表主键" , example = "0")
+    private Long roleId;
     /**
      * 资源表主键
      */
-        @ApiModelProperty(value = "资源表主键" , example = "0")
+    @ApiModelProperty(value = "资源表主键" , example = "0")
+    private Long resourceId;
 
-            @TableId("resource_id")
-            private Long resourceId;
+    public static final String ROLE_ID ="role_id";
+    public static final String RESOURCE_ID ="resource_id";
 
-public static final String ROLE_ID ="role_id";
-public static final String RESOURCE_ID ="resource_id";
-
-    @JsonIgnore
-    public Long getId(){
-            return this.resourceId;
-            }
-    @JsonIgnore
-    public void setId(Long resourceId){
-            this.resourceId = resourceId;
-            }
 
 }
