@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @date 2022-06-23
  */
 @Service
-public class SysUserServiceImpl extends ComServiceImpl implements SysUserService{
+public class SysUserServiceImpl extends ComServiceImpl<SysUserMapper,SysUser> implements SysUserService{
 
     @Resource
     private SysUserMapper sysUserMapper;
@@ -52,7 +52,7 @@ public class SysUserServiceImpl extends ComServiceImpl implements SysUserService
      * 修改系统用户
      */
     @Override
-    public int updateById(SysUser updateRequest){
+    public int updateByKey(SysUser updateRequest){
 //        updateRequest.setUpdateBy(getUserId());
         updateRequest.setUpdateTime(new Date());
         return sysUserMapper.updateById(updateRequest);

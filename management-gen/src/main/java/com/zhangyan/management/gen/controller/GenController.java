@@ -7,8 +7,10 @@ import com.zhangyan.management.gen.entity.SysGenTable;
 import com.zhangyan.management.gen.entity.SysGenTableColumn;
 import com.zhangyan.management.gen.service.IGenTableColumnService;
 import com.zhangyan.management.gen.service.IGenTableService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +29,8 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/tool/gen")
+@Api(value = "Gen", tags = "代码生成管理")
+@Slf4j
 public class GenController
 {
     @Autowired

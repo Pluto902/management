@@ -1,6 +1,8 @@
 package com.zhangyan.management.system.service;
 
 import java.util.List;
+
+import com.zhangyan.management.common.service.ComService;
 import com.zhangyan.management.system.entity.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhangyan.management.system.pojo.SysRoleParam;
@@ -12,7 +14,7 @@ import com.zhangyan.management.common.util.ResultList;
  * @author ZhangYan
  * @date 2022-06-28
  */
-public interface SysRoleService extends IService {
+public interface SysRoleService extends ComService<SysRole> {
 
     /**
      * 获取角色信息详细信息
@@ -27,7 +29,7 @@ public interface SysRoleService extends IService {
     /**
      * 修改角色信息
      */
-    int updateById(SysRole updateRequest);
+    int updateByKey(SysRole updateRequest);
 
     /**
      * 删除角色信息

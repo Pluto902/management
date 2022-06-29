@@ -1,6 +1,7 @@
 package com.zhangyan.management.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zhangyan.management.common.mapper.ComMapper;
 import com.zhangyan.management.system.entity.SysUser;
 import com.zhangyan.management.system.pojo.SysUserParam;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +16,7 @@ import java.util.List;
  * @date 2022-06-23
  */
 @Mapper
-public interface SysUserMapper extends BaseMapper {
+public interface SysUserMapper extends ComMapper<SysUser> {
 
     /**
      * 获取系统用户详细信息

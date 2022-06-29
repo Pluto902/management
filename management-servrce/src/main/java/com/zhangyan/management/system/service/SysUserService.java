@@ -1,5 +1,6 @@
 package com.zhangyan.management.system.service;
 
+import com.zhangyan.management.common.service.ComService;
 import com.zhangyan.management.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhangyan.management.system.pojo.SysUserParam;
@@ -11,7 +12,7 @@ import com.zhangyan.management.common.util.ResultList;
  * @author ZhangYan
  * @date 2022-06-23
  */
-public interface SysUserService extends IService {
+public interface SysUserService extends ComService<SysUser> {
 
     /**
      * 获取系统用户详细信息
@@ -26,7 +27,7 @@ public interface SysUserService extends IService {
     /**
      * 修改系统用户
      */
-    int updateById(SysUser updateRequest);
+    int updateByKey(SysUser updateRequest);
 
     /**
      * 删除系统用户

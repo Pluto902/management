@@ -1,5 +1,6 @@
 package com.zhangyan.management.system.mapper;
 
+import com.zhangyan.management.common.mapper.ComMapper;
 import com.zhangyan.management.system.entity.SysRole;
 import com.zhangyan.management.system.pojo.SysRoleParam;
 import com.zhangyan.management.system.pojo.SysRoleDelParam;
@@ -16,7 +17,7 @@ import java.util.List;
  * @date 2022-06-28
  */
 @Mapper
-public interface SysRoleMapper extends BaseMapper {
+public interface SysRoleMapper extends ComMapper<SysRole> {
 
     /**
      * 获取角色信息详细信息

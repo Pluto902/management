@@ -1,5 +1,6 @@
 package com.zhangyan.management.common.service;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
@@ -10,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
  * @since 2022-06-22 16:51
  * 公共service
  */
-public class ComServiceImpl extends ServiceImpl {
+public class ComServiceImpl <D extends BaseMapper<E>, E> extends ServiceImpl<D, E> implements ComService<E> {
     //    /**
 //     * 获取用户缓存信息
 //     */

@@ -10,7 +10,10 @@ import com.zhangyan.management.common.util.ResultList;
 import com.zhangyan.management.common.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +38,9 @@ import com.zhangyan.management.system.pojo.SysRoleDelParam;
  */
 
 @RestController
-@RequestMapping("/management/role")
+@RequestMapping("/management/system/role")
+@Api(value = "SysRole", tags = "角色管理")
+@Slf4j
 public class SysRoleController extends ComController {
 
     @Autowired
@@ -76,7 +81,7 @@ public class SysRoleController extends ComController {
     public Result edit(@RequestBody SysRole updateRequest)
     {
         if(StringUtils.isNotEmpty(updateRequest)) {
-            return toResult(sysRoleService.updateById(updateRequest));
+            return toResult(sysRoleService.updateByKey(updateRequest));
         }
         return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }

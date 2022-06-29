@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import com.zhangyan.management.common.mapper.ComMapper;
 
 import java.util.List;
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  * @date ${datetime}
  */
 @Mapper
-public interface ${ClassName}Mapper extends BaseMapper {
+public interface ${ClassName}Mapper extends ComMapper<${ClassName}> {
 
     /**
      * 获取${functionName}详细信息

@@ -6,13 +6,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import ${packageName}.pojo.${ClassName}Param;
 import ${packageName}.pojo.${ClassName}DelParam;
 import com.zhangyan.management.common.util.ResultList;
+import com.zhangyan.management.common.service.ComService;
 /**
  * ${functionName}Service接口
  *
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${ClassName}Service extends IService {
+public interface ${ClassName}Service extends ComService<${ClassName}> {
 
     /**
      * 获取${functionName}详细信息
@@ -27,7 +28,7 @@ public interface ${ClassName}Service extends IService {
     /**
      * 修改${functionName}
      */
-    int updateById(${ClassName} updateRequest);
+    int updateByKey(${ClassName} updateRequest);
 
     /**
      * 删除${functionName}

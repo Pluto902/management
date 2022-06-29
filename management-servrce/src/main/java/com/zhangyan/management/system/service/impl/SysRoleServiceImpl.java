@@ -5,6 +5,9 @@ import java.util.List;
 import com.zhangyan.management.common.constant.Constant;
 import com.zhangyan.management.common.util.DateUtils;
 import com.zhangyan.management.common.util.ResultList;
+import com.zhangyan.management.system.entity.SysUser;
+import com.zhangyan.management.system.mapper.SysUserMapper;
+import com.zhangyan.management.system.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -26,7 +29,7 @@ import javax.annotation.Resource;
  * @date 2022-06-28
  */
 @Service
-public class SysRoleServiceImpl extends ComServiceImpl implements SysRoleService{
+public class SysRoleServiceImpl extends ComServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
     @Resource
     private SysRoleMapper sysRoleMapper;
@@ -56,7 +59,7 @@ public class SysRoleServiceImpl extends ComServiceImpl implements SysRoleService
      * 修改角色信息
      */
     @Override
-    public int updateById(SysRole updateRequest){
+    public int updateByKey(SysRole updateRequest){
 //        updateRequest.setUpdateBy(getUserId());
         updateRequest.setUpdateTime(new Date());
         return sysRoleMapper.updateById(updateRequest);

@@ -11,6 +11,7 @@ import com.zhangyan.management.common.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
 ##import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ import ${packageName}.entity.${ClassName};
 import ${packageName}.service.${ClassName}Service;
 import ${packageName}.pojo.${ClassName}Param;
 import ${packageName}.pojo.${ClassName}DelParam;
+import lombok.extern.slf4j.Slf4j;
 
 
 
@@ -37,6 +39,8 @@ import ${packageName}.pojo.${ClassName}DelParam;
 
 @RestController
 @RequestMapping("/${moduleName}/${businessName}")
+@Api(value = "${ClassName}", tags = "${functionName}")
+@Slf4j
 public class ${ClassName}Controller extends ComController {
 
     @Autowired
@@ -77,7 +81,7 @@ public class ${ClassName}Controller extends ComController {
     public Result edit(@RequestBody ${ClassName} updateRequest)
     {
         if(StringUtils.isNotEmpty(updateRequest)) {
-            return toResult(${className}Service.updateById(updateRequest));
+            return toResult(${className}Service.updateByKey(updateRequest));
         }
         return Result.createFailResult(ResultCodeEnums.BAD_REQUEST.getCode(),ResultCodeEnums.BAD_REQUEST.getMsg());
     }
